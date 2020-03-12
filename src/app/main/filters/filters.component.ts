@@ -18,10 +18,12 @@ export class FiltersComponent implements OnInit {
     this.providersService.getProvidersList(params,true).subscribe((data)=>{
       this.providers = data;
       console.log('Providers: ', data);
-    });
+    },
+    (err)=>{console.log(err)});
     this.providersService.getProviderById(params,1,true).subscribe((data)=>{
       console.log('Provider By ID: ', data);
-    })
+    },
+    (err)=>{console.log(err)})
   }
 
 }
