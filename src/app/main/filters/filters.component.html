@@ -1,8 +1,5 @@
 <div class="filters">
     <mat-tab-group>
-        <mat-tab label="All"></mat-tab>
-        <mat-tab label="Super Caps"></mat-tab>
-        <mat-tab label="Strong Caps"></mat-tab>
-        <mat-tab label="Xplode"></mat-tab>
+        <mat-tab *ngFor="let provider of providers" [label]="provider"></mat-tab>
     </mat-tab-group>
 </div>

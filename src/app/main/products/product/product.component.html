@@ -2,9 +2,9 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{product.name}}</mat-card-title>
-      <mat-card-subtitle> Price: {{product.price}}zł</mat-card-subtitle>
+      <mat-card-subtitle> Price: {{product.nettoPrice}}zł</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{product.image}}" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="{{product.photoString}}" alt="Photo of a Shiba Inu">
     <mat-card-content>
       <p>
         {{(product.description.length > 20) ? (product.description | slice:0:20)+'...':(product.description)}}
