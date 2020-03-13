@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDetailsComponent } from './main/products/product-details/product-details/product-details.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     FiltersComponent,
     ProductsComponent,
     FooterComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

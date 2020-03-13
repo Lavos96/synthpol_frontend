@@ -3,5 +3,6 @@ export enum EndpointsEnum{
     PROVIDERS_LIST = 'providers',
     PROVIDERS_BY_ID = 'providers/',
     PRODUCTS_LIST = 'products',
-    PRODUCTS_BY_ID = 'products/'
+    PRODUCTS_BY_ID = 'products/',
+    CATEGORIES_LIST = 'categories/',
 }

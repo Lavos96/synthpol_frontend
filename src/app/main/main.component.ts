@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/services/http/productsService.service';
+import { DataService } from 'src/services/data/data.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-main',
