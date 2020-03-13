@@ -9,8 +9,9 @@ export class Product{
     providerId: number;
     provider: any;
     orderItems: any;
+    categoryId: number;
     
-    constructor(name:string,image:string,desc:string, price:number,vat:number, providerId:number,productId:number,provider:any,orderedItems:any){
+    constructor(name:string,image:string,desc:string, price:number,vat:number, providerId:number,productId:number,provider:any,orderedItems:any, categoryId:number){
         this.name = name;
         this.photoString = image;
         this.description = desc;
@@ -20,5 +21,6 @@ export class Product{
         this.providerId = providerId;
         this.provider = provider;
         this.orderItems = orderedItems;
+        this.categoryId = categoryId;
     }
 }

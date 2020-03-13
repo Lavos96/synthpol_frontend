@@ -1,15 +1,10 @@
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{product.name}}</mat-card-title>
-      <mat-card-subtitle> Price: {{product.nettoPrice}}zł</mat-card-subtitle>
+      <mat-card-title>{{((product.name.length > 20) ? (product.name | slice:0:15)+'...':(product.name)) | titlecase}}</mat-card-title>
+      <mat-card-subtitle> Cena: {{product.nettoPrice}}zł</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{product.photoString}}" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        {{(product.description.length > 20) ? (product.description | slice:0:20)+'...':(product.description)}}
-      </p>
-    </mat-card-content>
+    <img (click)="moveToDetails()" mat-card-image src="{{product.photoString}}" alt="Photo of a Product">
     <mat-card-actions>
       <button mat-icon-button aria-label="add to cart" matTooltip="Add to cart"
       [matTooltipShowDelay]="500"

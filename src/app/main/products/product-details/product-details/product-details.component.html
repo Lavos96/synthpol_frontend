@@ -1,0 +1,19 @@
+<div class="container">
+<div class="half-width-left">
+    <img class="center-img" src="{{product?.photoString}}" alt="Photo of a Product">
+</div>
+<div class="half-width-rigth">
+    <h2>{{product?.name}}</h2>
+    <h4>Cena: {{product?.nettoPrice}}zł</h4>
+    <h4>Opis:</h4>
+    <p>
+        {{product?.description}}
+    </p>
+    <button mat-icon-button aria-label="add to cart" matTooltip="Add to cart"
+      [matTooltipShowDelay]="500"
+      matTooltipPosition="left">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+      <button mat-stroked-button class="come-back-btn" (click)="comeBackShopping()">Wróć do zakupów</button>
+</div>
+</div>
