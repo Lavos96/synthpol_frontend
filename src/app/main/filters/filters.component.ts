@@ -22,6 +22,7 @@ export class FiltersComponent implements OnInit {
 
   ngOnInit(): void {
     const params= null;
+
     // pobieramy liste providerów
     this.providersService.getProvidersList(params,false).subscribe((data)=>{
       this.providers = data;
@@ -33,13 +34,21 @@ export class FiltersComponent implements OnInit {
 
   filterByProviders(event){
     const params = null;
+    this.dataService.currentProvider = event.index;
     // pobieramy liste produktow z backendu a nastepnie filtrujemy dane na podstawie providerId
     // event.index -> to index zaznaczonego providera z menu filters
     this.productService.getProductsList(params,false).pipe(
       map(products=>products.filter(product=>{
         if(event.index!==0){
-          return product.providerId === event.index
-        }else {
+          if(this.dataService.currentCategory!==0 && event.index !== 0){
+            return ((product.providerId === event.index) && (product.categoryId ===this.dataService.currentCategory));
+          } else {
+            console.log(product.providerId);
+            return product.providerId === event.index;
+          }
+        } else if(event.index === 0 && this.dataService.currentCategory !==0 ) {
+          return product.categoryId ===this.dataService.currentCategory;
+        } else {
           return product;
         }
       }))
