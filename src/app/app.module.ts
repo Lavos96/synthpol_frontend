@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './main/products/product-details/product-details/product-details.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { ProductDetailsComponent } from './main/products/product-details/product
     MatIconModule,
     MatTooltipModule,
     HttpClientModule,
+    MatSidenavModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

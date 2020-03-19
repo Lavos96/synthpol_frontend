@@ -1,5 +1,30 @@
-<div class="products-container">
-    <div class="products-container" *ngFor="let product of products">
-        <app-product class="product" [product]="product"></app-product>
+<!--<div class="products-container">-->
+<button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="drawer.toggle()">
+    <mat-icon>{{drawer.opened?'menu_open':'menu'}}</mat-icon>
+</button>
+<mat-drawer-container>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <mat-form-field>
+            <mat-label>Filtruj po kategorii</mat-label>
+            <mat-select #select (selectionChange)="changeCategory($event)" [(value)]="currentCategory">
+                <mat-option *ngFor="let category of categories" [value]="category.categoryName">
+                    {{category.categoryName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br/>
+        <button mat-raised-button (click)="clearCategoryFilter()">Wyczyść filtr</button>
+    </mat-drawer>
+    <div class="products-container">
+            <div class="products-container content" *ngFor="let product of products">
+                <app-product class="product" [product]="product"></app-product>
+            </div>
+        <div *ngIf="products.length === 0">
+            <h5>Nie znaleziono produktów!</h5>
+        </div>
     </div>
-</div>
+</mat-drawer-container>
+<!--<div class="products-container" *ngFor="let product of products">
+        <app-product class="product" [product]="product"></app-product>
+    </div>-->
+<!--</div>-->
