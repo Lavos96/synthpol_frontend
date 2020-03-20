@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/services/http/productsService.service';
 import {Location} from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { ReduceCartCookieSize } from 'src/services/reduceCartCookieSize.service';
 
 @Component({
   selector: 'app-product-details',
@@ -19,7 +21,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(private dataService: DataService,
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private location: Location) { }
+    private location: Location,
+    private cookieService: CookieService,
+    private reduceCartCookieService: ReduceCartCookieSize) { }
 
   ngOnInit(): void {
     // jesli w dataService wybrany produkt nie jest nullem i nie jest undefined to pobierz z niego wartosc do wyswietlenia w templacte
@@ -43,6 +47,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   comeBackShopping(){
     this.location.back();
+  }
+
+  addToCart(){
+    this.dataService.shoppingCart.push(this.product);
+    this.dataService.cartSubject.next(this.dataService.shoppingCart);
+    this.cookieService.set('shopping-cart',this.reduceCartCookieService.reduceSizeOfCookie(),1);
   }
 
   ngOnDestroy(): void {

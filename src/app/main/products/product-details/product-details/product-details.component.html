@@ -9,10 +9,11 @@
     <p>
         {{product?.description}}
     </p>
-    <button mat-icon-button aria-label="add to cart" matTooltip="Add to cart"
+    <button mat-icon-button aria-label="add to cart" matTooltip="Dodaj do koszyka"
       [matTooltipShowDelay]="500"
-      matTooltipPosition="left">
-        <mat-icon>shopping_cart</mat-icon>
+      matTooltipPosition="left"
+      (click)="addToCart()">
+        <mat-icon>add_shopping_cart</mat-icon>
       </button>
       <button mat-stroked-button class="come-back-btn" (click)="comeBackShopping()">Wróć do zakupów</button>
 </div>

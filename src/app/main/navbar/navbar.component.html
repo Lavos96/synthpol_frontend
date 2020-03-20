@@ -2,7 +2,11 @@
     <h1 class="baner">SynthPol</h1>
 
     <div class="navbar-buttons">
-        <button mat-fab color="#DAF0EE">Login</button>
+        <button mat-icon-button aria-label="cart" matTooltip="Koszyk" [matTooltipShowDelay]="500"
+            matTooltipPosition="below" class="btn-element" (click)="navigateToCart()">
+            <mat-icon [matBadge]="productsInCartCounter">shopping_cart</mat-icon>
+        </button>
+        <button class="btn-element" mat-fab color="#DAF0EE">Login</button>
     </div>
 
 </div>

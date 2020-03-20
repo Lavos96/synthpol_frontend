@@ -21,6 +21,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './main/products/product-details/product-details/product-details.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSelectModule} from '@angular/material/select';
+import { CookieService } from 'ngx-cookie-service';
+import {MatBadgeModule} from '@angular/material/badge';
+import { CartComponent } from './main/cart/cart/cart.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { CheckoutComponent } from './main/cart/cart/checkout/checkout/checkout.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -32,7 +41,9 @@ import {MatSelectModule} from '@angular/material/select';
     ProductsComponent,
     FooterComponent,
     ProductComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +57,14 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule,
     MatSidenavModule,
     MatSelectModule,
+    MatBadgeModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatRadioModule,
+    FormsModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

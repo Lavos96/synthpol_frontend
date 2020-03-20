@@ -1,0 +1,10 @@
+<div class="container">
+    <label id="method-of-payment-label">Wybierz metode płatności</label>
+    <mat-radio-group aria-labelledby="methods of payment" class="radio-group" [(ngModel)]="methodOfPayment">
+        <mat-radio-button class="radio-button" *ngFor="let method of methodsOfPayment" [value]="method">
+            {{method}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <div>Wybrana metoda płatności: {{methodOfPayment}}</div>
+    <button mat-raised-button class="end-btn" (click)="pay()">Zapłać</button>
+</div>

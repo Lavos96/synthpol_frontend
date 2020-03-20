@@ -43,7 +43,6 @@ export class FiltersComponent implements OnInit {
           if(this.dataService.currentCategory!==0 && event.index !== 0){
             return ((product.providerId === event.index) && (product.categoryId ===this.dataService.currentCategory));
           } else {
-            console.log(product.providerId);
             return product.providerId === event.index;
           }
         } else if(event.index === 0 && this.dataService.currentCategory !==0 ) {
