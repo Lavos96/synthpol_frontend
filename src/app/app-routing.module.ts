@@ -15,7 +15,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AppComponent,
     canActivate: [AppAuthGuard], 
-    data: { roles: ['admin', 'employer'] }
+    data: { roles: ['admin', 'user'] }
   },
   {path:'product/:id', component: ProductDetailsComponent},
   {path:'products', component: ProductsComponent},
