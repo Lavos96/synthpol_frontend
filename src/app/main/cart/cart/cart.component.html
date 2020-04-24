@@ -47,5 +47,5 @@
         <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5,10]" showFirstLastButtons>
         </mat-paginator>
     </div>
-    <button mat-raised-button class="end" (click)="moveToCheckout()"[disabled]="dataService.shoppingCart.length === 0">Przejdź do płatności</button>
+    <button mat-raised-button class="end" (click)="moveToCheckout()"[disabled]="dataService.shoppingCart.length === 0">Złóż zamówienie</button>
 </div>

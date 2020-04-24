@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ReduceCartCookieSize } from 'src/services/reduceCartCookieSize.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit {
   constructor(public dataService:DataService,
     private cookieService: CookieService,
     private reduceCartCookieSize: ReduceCartCookieSize,
-    private router: Router) { }
+    private router: Router,
+    private keycloakService: KeycloakService) { }
 
   ngOnInit(): void {
     this.dataService.cartSubject.subscribe((cart)=>{
@@ -55,7 +57,11 @@ export class CartComponent implements OnInit {
   }
 
   moveToCheckout(){
-    this.router.navigateByUrl('/checkout');
+    if(this.dataService.isUserLoggedIn){
+      this.router.navigateByUrl('/checkout');
+    } else {
+      this.keycloakService.login();
+    }
   }
 
 }

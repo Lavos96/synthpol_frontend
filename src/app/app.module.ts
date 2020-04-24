@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, DoBootstrap, ApplicationRef } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +30,9 @@ import { CheckoutComponent } from './main/cart/cart/checkout/checkout/checkout.c
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { KeycloakService, KeycloakConfig, KeycloakAngularModule } from 'keycloak-angular';
 
+const keycloakService = new KeycloakService();
 
 @NgModule({
   declarations: [
@@ -63,8 +65,35 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatRadioModule,
     FormsModule,
     MatSnackBarModule,
+    KeycloakAngularModule,
   ],
-  providers: [CookieService],
-  bootstrap: [AppComponent]
+  providers: [CookieService,{
+    provide: KeycloakService,
+    useValue: keycloakService
+  }],
+ //bootstrap: [AppComponent]
+ entryComponents: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap {
+  ngDoBootstrap(appRef: ApplicationRef) {
+  let keycloakConfig: KeycloakConfig = {
+    url: 'http://localhost:8080/auth',
+    realm: 'SynthPol',
+    clientId: 'SynthPolAngularClient',   
+    "credentials": {
+    "secret": "b0678735-3e26-4be3-b0cc-d0b76325fa4f"
+    }
+  }
+  keycloakService
+  .init({config: keycloakConfig,  initOptions: {
+    onLoad: 'check-sso',
+    //silentCheckSsoRedirectUri: window.location.origin + '/silentCheck'
+}})
+ .then(() => {
+  console.log('[ngDoBootstrap] bootstrap app');
+  appRef.bootstrap(AppComponent);
+})
+.catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
+}
+
+}
