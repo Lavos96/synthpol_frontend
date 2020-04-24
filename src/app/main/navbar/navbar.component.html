@@ -6,7 +6,8 @@
             matTooltipPosition="below" class="btn-element" (click)="navigateToCart()">
             <mat-icon [matBadge]="productsInCartCounter">shopping_cart</mat-icon>
         </button>
-        <button class="btn-element" mat-fab color="#DAF0EE">Login</button>
+        <button *ngIf="!dataService.isUserLoggedIn" (click)="login()" class="btn-element" mat-fab color="#DAF0EE">Login</button>
+        <button *ngIf="dataService.isUserLoggedIn" (click)="logout()" class="btn-element" mat-fab color="#DAF0EE">Logout</button>
     </div>
 
 </div>

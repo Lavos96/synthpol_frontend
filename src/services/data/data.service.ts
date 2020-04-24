@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductsService } from '../http/productsService.service';
 import { map } from 'rxjs/operators';
+import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,15 @@ export class DataService {
   selectedProduct: Product;
   currentProvider: number;
   currentCategory: number = 0;
+  isUserLoggedIn: boolean;
   shoppingCart: Product[] = [];
   // BehaviourSubject to taki typ Observabla który umożliwia programiście wysyłanie danych za pomocą funkcji next wtedy gdy jest to potrzebne
   // ponadto BehaviourSubjecta mozemy zainicjować jakąś początkową wartością w tym przypadku jest to pusta tablica
   productsSubject: BehaviorSubject<Product[]> = new BehaviorSubject([]);
   cartSubject: BehaviorSubject<Product[]> = new BehaviorSubject([]);
 
-  constructor(private cookieService: CookieService,private productsService: ProductsService) {
+  constructor(private cookieService: CookieService,private productsService: ProductsService,
+    private keycloakService: KeycloakService) {
     //this.cookieService.set('shopping-cart','');
     let shoppingCart=this.cookieService.get('shopping-cart');
     if(shoppingCart!=='' && shoppingCart!==null && typeof(shoppingCart)!=='undefined'){
@@ -43,7 +46,12 @@ export class DataService {
     })
 
   }
+  this.keycloakService.isLoggedIn().then((resp)=>{
+    this.isUserLoggedIn = resp;
+    console.log(this.isUserLoggedIn)
+  },()=>{
+    this.isUserLoggedIn = false;
+    console.log(this.isUserLoggedIn)
+  });
   }
-
-
 }
