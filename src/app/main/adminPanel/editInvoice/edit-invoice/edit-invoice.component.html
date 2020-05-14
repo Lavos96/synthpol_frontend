@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="table-container">
+        <div *ngIf="element" class="example-element-detail">
+            <form class="form" [formGroup]="editInvoiceForm" (ngSubmit)="onSubmit()">
+                        <div class="seller-buyer-header">
+                            <div>
+                                <h3>Synthpol</h3>
+                            </div>
+                            <div>
+                                <div class="example-element-position">Data sprzedaży: {{element?.order.sellDate | date}}</div>
+                                <div class="example-element-position">Data wystawienia: {{element?.issueDate | date}}</div>
+                            </div>
+                        </div>
+                        <div class="seller-buyer-header">
+                            <div>
+                                <div class="header">Sprzedawca</div>
+                                <div class="example-element-position">SynthPol</div>
+                                <div class="example-element-position">ul.Pudziana 15</div>
+                                <div class="example-element-position">42-200</div>
+                                <div class="example-element-position">Pudzianów</div>
+                                <div class="example-element-position">NIP: 1234567890</div>
+                            </div>
+                            <div class="example-element-detail">
+                            <div class="header">Nabywca</div>
+                            <!-- <div class="example-element-position"> {{element?.name}} </div> -->
+                            <mat-form-field class="input" >
+                                <mat-label>Imię i Nazwisko</mat-label>
+                                <input matInput placeholder="Imię i Nazwisko"  formControlName="name">
+                                <mat-error>Pole imię nie może być puste!</mat-error>
+                            </mat-form-field>
+                            <!-- <div class="example-element-name">Adres: {{element?.city}}  {{element?.zipCode}}  ul.{{element?.street}}</div> -->
+                            <mat-form-field class="input" >
+                                <mat-label>Miasto</mat-label>
+                                <input matInput placeholder="Miasto"  formControlName="city">
+                                <mat-error>Pole miasto nie może być puste!</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="input" >
+                                <mat-label>Kod pocztowy</mat-label>
+                                <input matInput placeholder="Kod Pocztowy"  formControlName="zipCode">
+                                <mat-error *ngIf="editInvoiceForm.controls['zipCode'].hasError('required') ">Kod pocztowy nie może być puste!</mat-error>
+                                <mat-error *ngIf="editInvoiceForm.controls['zipCode'].hasError('notValidZipCode')">Kod pocztowy powinien być w formacie 00-000!</mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="input" >
+                                <mat-label>Ulica</mat-label>
+                                <input matInput placeholder="Ulica"  formControlName="street">
+                                <mat-error>Pole ulica nie może być puste!</mat-error>
+                            </mat-form-field>
+                            <!-- <div class="example-element-weight">Numer NIP: {{element?.nip}} </div> -->
+                            <mat-form-field class="input" >
+                                <mat-label>NIP</mat-label>
+                                <input matInput placeholder="NIP"  formControlName="nip">
+                                <mat-error *ngIf="editInvoiceForm.controls['nip'].hasError('invalidNip')">Nieprawidłowy NIP!</mat-error>
+                            </mat-form-field>
+                            </div>
+                        </div>
+                            <div class="example-element-weight">Lista produktów:</div>
+                            <br/>
+                            <div *ngFor="let product of element.order.orderItems" class="example-element-weight"><b>Produkt:</b> {{product?.product.name}}| <b>sztuk</b> {{product?.amount}}| <b>Cena netto</b> {{product?.nettoPrice}}zł| <b>Wartość netto</b>  {{product?.nettoPrice}}zł| <b>stawka vat</b> {{product?.product.vat}}%| <b>wartość vat</b>
+                                 {{product?.bruttoPrice-product.nettoPrice | number:'1.0-2'}}zł| <b>Wartość brutto</b> {{product?.bruttoPrice}}zł
+                                <mat-divider></mat-divider>
+                            </div>
+                            <br/>
+                            <div class="example-element-weight">Łączna wartość brutto: {{element?.order.orderValue}}zł
+                                <button [disabled]="!editInvoiceForm.valid || editInvoiceForm.pristine || checkIfValuesAreDifferent()" class="accept-btn" mat-raised-button>Zatwierdź zmiany</button>
+                            </div>
+                            </form>
+                    </div>
+    </div>
+</div>

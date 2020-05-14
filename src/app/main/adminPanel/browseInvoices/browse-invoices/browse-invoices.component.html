@@ -1,0 +1,107 @@
+<!-- THIS IS USED WHEN OPERATING ON MOCK DATA -->
+<!-- <div class="container">
+    <h3>Faktury</h3>
+    <div class="table-container">
+
+
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.invoice[column]}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                            <div class="example-element-position"> Faktura wystawiona na:  {{element.invoice.name}} </div>
+                            <div class="example-element-name">Adres: {{element.invoice.city}}  {{element.invoice.zipCode}}  ul.{{element.invoice.street}}</div>
+                            <div class="example-element-weight">Numer NIP: {{element.invoice.nip}} </div>
+                            <div class="example-element-weight">Lista produktów:</div>
+                            <div *ngFor="let product of element.postOrders" class="example-element-weight">Produkt: {{displayProductsnvoiceName(product.productId,product.quantityOfProducts,'name')}} sztuk {{product.quantityOfProducts}}  stawka vat {{displayProductsnvoiceName(product.productId,product.quantityOfProducts,'vat')}}%</div>
+                            <div class="example-element-weight">Łączna wartość zamówienia: {{displayTotalCost(element.postOrders)}}zł</div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+
+
+    </div>
+</div> -->
+
+<div class="container">
+    <h3>Faktury</h3>
+    <div class="table-container">
+
+
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="seller-buyer-header">
+                            <div>
+                                <h3>Synthpol</h3>
+                            </div>
+                            <div>
+                                <div class="example-element-position">Data sprzedaży: {{element.order.sellDate | date}}</div>
+                                <div class="example-element-position">Data wystawienia: {{element.issueDate | date}}</div>
+                            </div>
+                        </div>
+                        <div class="seller-buyer-header">
+                            <div>
+                                <div class="header">Sprzedawca</div>
+                                <div class="example-element-position">SynthPol</div>
+                                <div class="example-element-position">ul.Pudziana 15</div>
+                                <div class="example-element-position">42-200</div>
+                                <div class="example-element-position">Pudzianów</div>
+                                <div class="example-element-position">NIP: 1234567890</div>
+                            </div>
+                            <div>
+                            <div class="header">Nabywca</div>
+                            <div class="example-element-position"> {{element.name}} </div>
+                            <div class="example-element-name">Adres: {{element.city}}  {{element.zipCode}}  ul.{{element.street}}</div>
+                            <div class="example-element-weight">Numer NIP: {{element.nip}} </div>
+                            </div>
+                        </div>
+                            <div class="example-element-weight">Lista produktów:</div>
+                            <br/>
+                            <div *ngFor="let product of element.order.orderItems" class="example-element-weight"><b>Produkt:</b> {{product.product.name}}| <b>sztuk</b> {{product.amount}}| <b>Cena netto</b> {{product.nettoPrice}}zł| <b>Wartość netto</b>  {{product.nettoPrice}}zł| <b>stawka vat</b> {{product.product.vat}}%| <b>wartość vat</b>
+                                 {{product.bruttoPrice-product.nettoPrice | number:'1.0-2'}}zł| <b>Wartość brutto</b> {{product.bruttoPrice}}zł
+                                <mat-divider></mat-divider>
+                            </div>
+                            <br/>
+                            <div class="example-element-weight">Łączna wartość brutto: {{element.order.orderValue}}zł</div>
+                            <div class="btn">
+                            <button (click)="moveToEditInvoice(element)"  mat-raised-button>Edycja faktury</button>
+                            <button (click)="downloadEdiInvoice(element.invoiceId)" mat-raised-button>Pobierz fakture w formacie EDI</button>
+                            <button (click)="deleteInvoice(element)"  mat-raised-button>Usuń fakture</button>
+                            </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

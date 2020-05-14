@@ -36,4 +36,8 @@ export class NavbarComponent implements OnInit {
     this.keycloakService.logout();
   }
 
+  generate(){
+    this.router.navigateByUrl('browseInvoices');
+  }
+
 }
