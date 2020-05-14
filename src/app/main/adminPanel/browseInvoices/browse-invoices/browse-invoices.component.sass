@@ -1,0 +1,67 @@
+.container
+    display: flex
+    height: 80vh
+    justify-content: center
+    align-items: center
+    align-content: center
+    flex-direction: column
+.table-container
+    height: 60vh
+    overflow: auto
+table 
+    width: 80vw
+
+tr.example-detail-row 
+    height: 0
+    width: 80vw
+
+
+tr.example-element-row:not(.example-expanded-row):hover 
+    background: whitesmoke
+
+
+tr.example-element-row:not(.example-expanded-row):active
+    background: #efefef
+
+
+.example-element-row td 
+    border-bottom-width: 0
+
+
+.example-element-detail
+    overflow: hidden
+    display: flex
+    flex-direction: column
+
+
+.example-element-diagram 
+    min-width: 80px
+    border: 2px solid black
+    padding: 8px
+    font-weight: lighter
+    margin: 8px 0
+    height: 104px
+
+
+.example-element-symbol
+    font-weight: bold
+    font-size: 40px
+    line-height: normal
+
+
+.example-element-description
+    padding: 16px
+
+.example-element-description-attribution
+    opacity: 0.5
+.seller-buyer-header
+    display: flex
+    justify-content: space-between
+    margin-bottom: 10px
+.header
+     text-decoration: underline
+.btn
+    display: flex
+    //justify-content: center
+    justify-content: space-between
+    margin: 10px

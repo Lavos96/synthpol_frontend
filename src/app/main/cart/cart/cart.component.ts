@@ -58,7 +58,8 @@ export class CartComponent implements OnInit {
 
   moveToCheckout(){
     if(this.dataService.isUserLoggedIn){
-      this.router.navigateByUrl('/checkout');
+      //this.router.navigateByUrl('/checkout');
+      this.router.navigateByUrl('/orderForm');
     } else {
       this.keycloakService.login();
     }

@@ -1,0 +1,44 @@
+<div class="container">
+    <form class="form" [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field class="input" >
+            <mat-label>Imię</mat-label>
+            <input matInput placeholder="Imię"  formControlName="firstName">
+            <mat-error>Pole imię nie może być puste!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input" >
+            <mat-label>Nazwisko</mat-label>
+            <input matInput placeholder="Nazwisko" formControlName="lastName">
+            <mat-error>Pole nazwisko nie może być puste!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input" >
+            <mat-label>Miasto</mat-label>
+            <input matInput placeholder="Miasto"  formControlName="city">
+            <mat-error>Pole miasto nie może być puste!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input" >
+            <mat-label>Ulica</mat-label>
+            <input matInput placeholder="Ulica"  formControlName="street">
+            <mat-error>Pole ulica nie może być puste!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input" >
+            <mat-label>Kod pocztowy</mat-label>
+            <input matInput placeholder="Kod pocztowy"  formControlName="zipCode">
+            <mat-error *ngIf="orderForm.controls['zipCode'].hasError('required') ">Kod pocztowy nie może być puste!</mat-error>
+            <mat-error *ngIf="orderForm.controls['zipCode'].hasError('notValidZipCode')">Kod pocztowy powinien być w formacie 00-000!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input" >
+            <mat-label>NIP</mat-label>
+            <input matInput placeholder="NIP"  formControlName="nip">
+            <mat-error *ngIf="orderForm.controls['nip'].hasError('invalidNip')">Nieprawidłowy NIP!</mat-error>
+        </mat-form-field>
+
+        <button [disabled]="!orderForm.valid" mat-raised-button type="submit">Przejdź do płatności</button>
+      
+      </form>
+</div>

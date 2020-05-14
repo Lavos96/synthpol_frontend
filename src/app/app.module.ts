@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, DoBootstrap, ApplicationRef } from '@angular/core';
+import { NgModule, DoBootstrap, ApplicationRef, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +31,17 @@ import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { KeycloakService, KeycloakConfig, KeycloakAngularModule } from 'keycloak-angular';
+import { OrderFormComponent } from './main/cart/cart/orderForm/order-form/order-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { BrowseInvoicesComponent } from './main/adminPanel/browseInvoices/browse-invoices/browse-invoices.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+import { EditInvoiceComponent } from './main/adminPanel/editInvoice/edit-invoice/edit-invoice.component';
+
+registerLocaleData(localePl, 'pl-Pl');
 
 const keycloakService = new KeycloakService();
 
@@ -45,7 +56,10 @@ const keycloakService = new KeycloakService();
     ProductComponent,
     ProductDetailsComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderFormComponent,
+    BrowseInvoicesComponent,
+    EditInvoiceComponent
   ],
   imports: [
     BrowserModule,
@@ -66,11 +80,17 @@ const keycloakService = new KeycloakService();
     FormsModule,
     MatSnackBarModule,
     KeycloakAngularModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
   ],
   providers: [CookieService,{
     provide: KeycloakService,
     useValue: keycloakService
-  }],
+  },
+  { provide: LOCALE_ID, useValue: "pl-Pl" }
+],
  //bootstrap: [AppComponent]
  entryComponents: [AppComponent]
 })

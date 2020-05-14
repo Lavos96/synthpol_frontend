@@ -6,6 +6,9 @@ import { CartComponent } from './main/cart/cart/cart.component';
 import { CheckoutComponent } from './main/cart/cart/checkout/checkout/checkout.component';
 import { AppAuthGuard } from 'src/services/appAuthGuard.service';
 import { AppComponent } from './app.component';
+import { OrderFormComponent } from './main/cart/cart/orderForm/order-form/order-form.component';
+import { BrowseInvoicesComponent } from './main/adminPanel/browseInvoices/browse-invoices/browse-invoices.component';
+import { EditInvoiceComponent } from './main/adminPanel/editInvoice/edit-invoice/edit-invoice.component';
 
 const routes: Routes = [
   { 
@@ -19,6 +22,11 @@ const routes: Routes = [
   },
   {path:'product/:id', component: ProductDetailsComponent},
   {path:'products', component: ProductsComponent},
+  {path:'orderForm', component: OrderFormComponent},
+  {path:'browseInvoices', component: BrowseInvoicesComponent, canActivate: [AppAuthGuard], 
+  data: { roles: ['admin'] }},
+  {path:'editInvoice', component: EditInvoiceComponent, canActivate: [AppAuthGuard], 
+  data: { roles: ['admin'] }},
   {path:'cart', component: CartComponent},
   {path:'checkout', component: CheckoutComponent},
   {path:'', component: ProductsComponent, pathMatch: 'full'},
