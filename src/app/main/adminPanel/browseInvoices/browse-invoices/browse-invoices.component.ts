@@ -94,6 +94,13 @@ export class BrowseInvoicesComponent implements OnInit {
     })
   }
 
+  downloadXmlInvoice(id:number){
+    this.invoicesService.getInvoiceXmlById({responseType: 'text'},id,false).subscribe((ediInvoice)=>{
+      var blob = new Blob([ediInvoice], {type: "text/xml;charset=utf-8"});
+      saveAs(blob, `faktura${id}.xml`);
+    })
+  }
+
   moveToEditInvoice(invoice){
     console.log('Do edycji: ', invoice);
     this.dataService.editInvoice = invoice;

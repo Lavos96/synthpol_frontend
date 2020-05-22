@@ -49,6 +49,23 @@ export class InvoicesService {
 
     }
 
+    public getInvoiceXmlById(params:any, id: number,mock:boolean){
+        // argument params zazwyczaj będzie nullem ale w przyszłości zapytanie mogłoby przyjmować jakieś dodatkowe parametry
+
+       // adres endpointa
+       const thisApiEndpoint = EndpointsEnum.INVOICE_XML_BY_ID+id.toString();
+       // adres bazowy
+       const baseUrl = EndpointsEnum.BASE_URL;
+       // jesli flaga mock jest ustawiona na true to wyslij fakowe dane
+       // w przecciwnym razie wykonaj zapytanie do backendu
+       if(mock){
+           return of('Zamockowane Xml');
+       } else {
+           return this.requestSend.getRequest(params,thisApiEndpoint,baseUrl);
+       }
+
+   }
+
     public editInvoice(params: any, body: any,invoiceId: number, mock: boolean){
         const thisApiEndpoint = EndpointsEnum.INVOICES_BY_ID+invoiceId.toString();
         const baseUrl = EndpointsEnum.BASE_URL;

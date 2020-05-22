@@ -10,4 +10,5 @@ export enum EndpointsEnum{
     INVOICES = 'Invoices',
     INVOICES_BY_ID = 'Invoices/',
     INVOICE_EDI_BY_ID = 'InvoicesEdi/',
+    INVOICE_XML_BY_ID = 'InvoicesEdi/xml/'
 }
